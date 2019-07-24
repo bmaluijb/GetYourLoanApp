@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get your loan!</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+
+<body>
+
+    <h1>Apply to get a loan!</h1>
+
+    <select id="loanApplications" onchange="loadApplication();">
+    </select>
+
+    <hr />
+
+
+    <table>
+        <tr>
+            <td>Full name and title</td>
+            <td colspan="3"><input type="text" name="inputName" id="inputName" size="25" autocomplete="off" onkeyup="validateApplication();" onblur="validateApplication();">
+                <br><label id="inputNameValidation" style="display:none">Name is required</label></td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td><input type="text" name="inputDoBMonth" id="inputDoBMonth" size="4" maxlength="2" placeholder="MM"
+                    autocomplete="off" onblur="validateApplication();"></td>
+            <td><input type="text" name="inputDoBDay" id="inputDoBDay" size="3" maxlength="2" placeholder="DD"
+                    autocomplete="off" onblur="validateApplication();"></td>
+            <td><input type="text" name="inputDoBYear" id="inputDoBYear" size="3" maxlength="4" placeholder="YYYY"
+                    autocomplete="off" onblur="validateApplication();"></td>
+        </tr>
+        <tr>
+            <td></td>
+                <td colspan="3">
+                        <label id="inputDoBValidation" style="display:none">Date is required</label>
+                    </td>
+        </tr>
+        <tr>
+            <td>Annual income</td>
+            <td colspan="3"><input type="text" name="inputAnnualIncome" id="inputAnnualIncome" size="25"
+                    autocomplete="off" onkeyup="validateApplication();" onblur="validateApplication();">
+                    <br><label id="inputAnnualIncomeValidation" style="display:none">Income is required</label>
+                </td>
+        </tr>
+        <tr>
+            <td>Check all that applies</td>
+            <td colspan="3">
+                    <input type="checkbox" id="IsEmployed" >I'm employed<br>  
+                    <input type="checkbox" id="HasKids" >I have kids<br>
+                    <input type="checkbox" id="HasLoans" >I have other loans<br>
+                    <input type="checkbox" id="HasCreditcards" >I have multiple credit cards
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="4">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td>What will you use this loan for?</td>
+            <td colspan="3"><textarea name="inputLoanPurpose" id="inputLoanPurpose" autocomplete="off" rows="3"
+                    cols="27" onkeyup="validateApplication();" onblur="validateApplication();"></textarea>
+                    <br><label id="inputLoanPurposeValidation" style="display:none">Purpose is required</label>
+                </td>
+        </tr>
+        <tr>
+            <td>How much do you want to borrow?</td>
+            <td colspan="3"><input type="text" name="inputLoanAmount" id="inputLoanAmount" size="25" autocomplete="off" onkeyup="validateApplication();" onblur="validateApplication();">
+                <br><label id="inputLoanAmountValidation" style="display:none">Loan amount is required</label>
+            </td>
+        <tr>
+            <td colspan="4">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td><button onclick="clearApplication();">Clear</button></td>
+            <td colspan="2" />
+            <td><button onclick="saveApplication();">Apply</button></td>
+        </tr>
+    </table>
+
+    <br>
+    <label id="riskSummary" name="riskSummary" class="border" style="display:none;"></label>
+
+
+</body>
+
+<script src="scripts/site.js"></script>
+
+</html>
