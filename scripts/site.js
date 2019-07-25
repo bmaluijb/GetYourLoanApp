@@ -1,4 +1,5 @@
 class LoanApplication {
+    Id = create_UUID();
     ApplicantName;
     ApplicantDateOfBirth;
     ApplicantAnnualIncome;
@@ -50,6 +51,16 @@ function initializeLoans() {
     LoanApplicationList[2] = la3;
 }
 
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
+
 function bindLoansToDropDown() {
 
     var dropDown = document.getElementById("loanApplications");
@@ -66,7 +77,7 @@ function bindLoansToDropDown() {
 
         var el = document.createElement("option");
         el.textContent = "Application of " + la.ApplicantName;
-        el.value = la.ApplicantName;
+        el.value = la.Id.toString();
         dropDown.appendChild(el);
     }
 }
@@ -107,7 +118,7 @@ function loadApplication() {
 
 function findLoanApplicationByName(name) {
     for (var i = 0; i < LoanApplicationList.length; i += 1) {
-        if (LoanApplicationList[i]["ApplicantName"] === name) {
+        if (LoanApplicationList[i]["Id"] === name) {
             return LoanApplicationList[i];
         }
     }
