@@ -13,7 +13,7 @@ a {
 }
 
 input {
-    margin: 5px;    
+    margin: 2px;    
 }
 
 label{
@@ -22,7 +22,7 @@ label{
 }
 
 textarea{
-    margin: 5px;
+    margin: 2px;
 }
 
 .btn-primary {
