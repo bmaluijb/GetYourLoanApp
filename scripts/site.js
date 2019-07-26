@@ -208,41 +208,54 @@ function validateApplication() {
     var la = getLoanApplicationDataFromInputs();
 
     if (la.ApplicantName == "") {
-        document.getElementById("inputNameValidation").style.display = "block";
+        document.getElementById("inputNameValidation")
+        .style.display = "block";
+
         valid = false;
     } else {
-        document.getElementById("inputNameValidation").style.display = "none";
+        document.getElementById("inputNameValidation")
+        .style.display = "none";
     }
 
     if (la.ApplicantDateOfBirth == undefined) {
-        document.getElementById("inputDoBValidation").style.display = "block";
+        document.getElementById("inputDoBValidation")
+        .style.display = "block";
+
         valid = false;
     } else {
-        document.getElementById("inputDoBValidation").style.display = "none";
+        document.getElementById("inputDoBValidation")
+        .style.display = "none";
     }
 
     if (la.ApplicantAnnualIncome == "") {
-        document.getElementById("inputAnnualIncomeValidation").style.display = "block";
+        document.getElementById("inputAnnualIncomeValidation")
+        .style.display = "block";
+
         valid = false;
     } else {
-        document.getElementById("inputAnnualIncomeValidation").style.display = "none";
+        document.getElementById("inputAnnualIncomeValidation")
+        .style.display = "none";
     }
 
     if (la.LoanPurpose == "") {
-        document.getElementById("inputLoanPurposeValidation").style.display = "block";
+        document.getElementById("inputLoanPurposeValidation")
+        .style.display = "block";
+
         valid = false;
     } else {
-        document.getElementById("inputLoanPurposeValidation").style.display = "none";
+        document.getElementById("inputLoanPurposeValidation")
+        .style.display = "none";
     }
 
     if (la.LoanAmount == "") {
-        document.getElementById("inputLoanAmountValidation").style.display = "block";
+        document.getElementById("inputLoanAmountValidation")
+        .style.display = "block";
+
         valid = false;
     } else {
-        document.getElementById("inputLoanAmountValidation").style.display = "none";
+        document.getElementById("inputLoanAmountValidation")
+        .style.display = "none";
     }
-
-
 
     return valid;
 }
@@ -261,13 +274,15 @@ function generateRickProfile(la) {
     var indexOfDr = nameAndTitle.search("Dr.");
     var indexOfDr2 = nameAndTitle.search("DR.");
 
-    if (indexOfMD > -1 || indexOfMD2 > -1 || indexOfMD3 > -1 || indexOfPhD > -1
-        || indexOfPhD2 > -1 || indexOfPhD3 > -1 || indexOfDr > -1 || indexOfDr2 > -1) {
+    if (indexOfMD > -1 || indexOfMD2 > -1 || indexOfMD3 > -1 
+        || indexOfPhD > -1 || indexOfPhD2 > -1 
+        || indexOfPhD3 > -1 || indexOfDr > -1 || indexOfDr2 > -1) {
 
         risk = risk - 1;
     }
 
-    var age = new Date().getFullYear() - la.ApplicantDateOfBirth.getFullYear();
+    var age = new Date().getFullYear() - 
+        la.ApplicantDateOfBirth.getFullYear();
 
     if (age > 60) {
         risk = risk + 2;
@@ -288,7 +303,8 @@ function generateRickProfile(la) {
     }
 
     if (la.Factors[2] == true || la.Factors[3] == true) {
-        //risk increases when the applicant has other loans or credit cards
+        //risk increases when the applicant has other 
+        //loans or credit cards
         risk = risk + 1;
     }
 
@@ -308,7 +324,8 @@ function generateRickProfile(la) {
         risk = risk + 2;
     }
 
-    if (indexOfHoliday > -1 || indexOfHoliday2 > -1 || indexOfHoliday3 > -1 || indexOfHoliday4 > -1) {
+    if (indexOfHoliday > -1 || indexOfHoliday2 > -1 
+        || indexOfHoliday3 > -1 || indexOfHoliday4 > -1) {
         //the loan will be used for a holiday
         risk = risk + 3;
     }
@@ -318,13 +335,13 @@ function generateRickProfile(la) {
         risk = risk + 1;
     }
 
-    var summaryText = "Dear " + la.ApplicantName;
-
+    
+    var reviewText = "";
 
     if (age < 18) {
-        summaryText += ", your application will not be reviewed, because you have to be 18 years or older.";
+        reviewText = "your application will not be reviewed, because you have to be 18 years or older.";
     } else {
-        summaryText += ", your application will be reviewed.";
+        reviewText = "your application will be reviewed.";
     }
 
     var riskProfile = "";
@@ -339,7 +356,7 @@ function generateRickProfile(la) {
         riskProfile = "high";
     }
 
-    summaryText += " Your risk profile is " + riskProfile;    
+    var summaryText = "Dear " + la.ApplicantName + ", " + reviewText + " Your risk profile is " + riskProfile;
 
     return summaryText;
 }
