@@ -129,11 +129,11 @@ function saveApplication() {
 
     if (validateApplication()) {
 
+        var newLa = getLoanApplicationDataFromInputs();
+
         var riskLabel = document.getElementById("riskSummary");
         riskLabel.style.display = "block";
-        riskLabel.innerText = generateRickProfile(la);    
-
-        var newLa = getLoanApplicationDataFromInputs();
+        riskLabel.innerText = generateRickProfile(newLa);    
 
         LoanApplicationList.push(newLa);
 
