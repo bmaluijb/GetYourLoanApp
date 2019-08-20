@@ -5,7 +5,7 @@
 Hi! 
 
 Welcome to the GitHub repository of the GetyourLoanApp application.
-This app is the demo app for the Pluralsight course [JavaScript Variables and Types](https://app.pluralsight.com/library/courses/microsoft-azure-cache-implementing/).
+This app is the demo app for the Pluralsight course [JavaScript Variables and Types](https://app.pluralsight.com/library/courses/javascript-variables-types/).
 
 You can download a copy of the code and follow along in the course.
 
