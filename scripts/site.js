@@ -111,7 +111,7 @@ function loadApplication() {
 
         var riskLabel = document.getElementById("riskSummary");
         riskLabel.style.display = "block";
-        riskLabel.innerText = generateRickProfile(la); 
+        riskLabel.innerText = generateRiskProfile(la); 
 
     }
 }
@@ -133,7 +133,7 @@ function saveApplication() {
 
         var riskLabel = document.getElementById("riskSummary");
         riskLabel.style.display = "block";
-        riskLabel.innerText = generateRickProfile(newLa);    
+        riskLabel.innerText = generateRiskProfile(newLa);    
 
         LoanApplicationList.push(newLa);
 
@@ -260,7 +260,7 @@ function validateApplication() {
     return valid;
 }
 
-function generateRickProfile(la) {
+function generateRiskProfile(la) {
     var risk = 3;
 
     var nameAndTitle = la.ApplicantName;
