@@ -8,6 +8,30 @@ class LoanApplication {
     LoanAmount;
 }
 
+function MyFunction() {
+
+    var x = 10;
+
+    if (true) {
+        
+        var x = "Hello";
+        
+    }
+
+    // x is "Hello" here
+}
+
+function MyFunction() {
+
+    var i = 5;
+
+    for (var i = 0; i < 10; i++) {
+        // ...
+    }
+
+    // i is 10 here
+}
+
 var LoanApplicationList = [];
 
 //fires when the page loads
@@ -51,12 +75,12 @@ function initializeLoans() {
     LoanApplicationList[2] = la3;
 }
 
-function create_UUID(){
+function create_UUID() {
     var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (dt + Math.random()*16)%16 | 0;
-        dt = Math.floor(dt/16);
-        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (dt + Math.random() * 16) % 16 | 0;
+        dt = Math.floor(dt / 16);
+        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
 }
@@ -111,7 +135,7 @@ function loadApplication() {
 
         var riskLabel = document.getElementById("riskSummary");
         riskLabel.style.display = "block";
-        riskLabel.innerText = generateRickProfile(la); 
+        riskLabel.innerHTML = generateRickProfile(la);
 
     }
 }
@@ -129,17 +153,17 @@ function saveApplication() {
 
     if (validateApplication()) {
 
-        var newLa = getLoanApplicationDataFromInputs();
-
         var riskLabel = document.getElementById("riskSummary");
         riskLabel.style.display = "block";
-        riskLabel.innerText = generateRickProfile(newLa);    
+        riskLabel.innerHTML = generateRickProfile(la);
+
+        var newLa = getLoanApplicationDataFromInputs();
 
         LoanApplicationList.push(newLa);
 
         bindLoansToDropDown();
 
-    }else {
+    } else {
         document.getElementById("riskSummary").style.display = "none";
     }
 }
@@ -153,7 +177,7 @@ function clearApplication() {
     document.getElementById("IsEmployed").checked = false;
     document.getElementById("HasKids").checked = false;
     document.getElementById("HasLoans").checked = false;
-    document.getElementById("HasCreditcards").checked = false;    
+    document.getElementById("HasCreditcards").checked = false;
     document.getElementById("inputLoanPurpose").value = "";
     document.getElementById("inputLoanAmount").value = "";
 
@@ -180,15 +204,15 @@ function getLoanApplicationDataFromInputs() {
     var year = document.getElementById("inputDoBYear").value;
 
     var isEmployed = document.getElementById("IsEmployed").checked;
-    var hasKids =  document.getElementById("HasKids").checked;
+    var hasKids = document.getElementById("HasKids").checked;
     var hasLoans = document.getElementById("HasLoans").checked;
-    var hasCreditcards = document.getElementById("HasCreditcards").checked;   
-    
-    
+    var hasCreditcards = document.getElementById("HasCreditcards").checked;
+
+
     la.Factors[0] = isEmployed;
     la.Factors[1] = hasKids;
     la.Factors[2] = hasLoans;
-    la.Factors[3] = hasCreditcards;    
+    la.Factors[3] = hasCreditcards;
 
     if (month != "" && day != "" && year != "") {
         la.ApplicantDateOfBirth = new Date(year, month, day);
@@ -209,52 +233,52 @@ function validateApplication() {
 
     if (la.ApplicantName == "") {
         document.getElementById("inputNameValidation")
-        .style.display = "block";
+            .style.display = "block";
 
         valid = false;
     } else {
         document.getElementById("inputNameValidation")
-        .style.display = "none";
+            .style.display = "none";
     }
 
     if (la.ApplicantDateOfBirth == undefined) {
         document.getElementById("inputDoBValidation")
-        .style.display = "block";
+            .style.display = "block";
 
         valid = false;
     } else {
         document.getElementById("inputDoBValidation")
-        .style.display = "none";
+            .style.display = "none";
     }
 
     if (la.ApplicantAnnualIncome == "") {
         document.getElementById("inputAnnualIncomeValidation")
-        .style.display = "block";
+            .style.display = "block";
 
         valid = false;
     } else {
         document.getElementById("inputAnnualIncomeValidation")
-        .style.display = "none";
+            .style.display = "none";
     }
 
     if (la.LoanPurpose == "") {
         document.getElementById("inputLoanPurposeValidation")
-        .style.display = "block";
+            .style.display = "block";
 
         valid = false;
     } else {
         document.getElementById("inputLoanPurposeValidation")
-        .style.display = "none";
+            .style.display = "none";
     }
 
     if (la.LoanAmount == "") {
         document.getElementById("inputLoanAmountValidation")
-        .style.display = "block";
+            .style.display = "block";
 
         valid = false;
     } else {
         document.getElementById("inputLoanAmountValidation")
-        .style.display = "none";
+            .style.display = "none";
     }
 
     return valid;
@@ -274,14 +298,14 @@ function generateRickProfile(la) {
     var indexOfDr = nameAndTitle.search("Dr.");
     var indexOfDr2 = nameAndTitle.search("DR.");
 
-    if (indexOfMD > -1 || indexOfMD2 > -1 || indexOfMD3 > -1 
-        || indexOfPhD > -1 || indexOfPhD2 > -1 
+    if (indexOfMD > -1 || indexOfMD2 > -1 || indexOfMD3 > -1
+        || indexOfPhD > -1 || indexOfPhD2 > -1
         || indexOfPhD3 > -1 || indexOfDr > -1 || indexOfDr2 > -1) {
 
         risk = risk - 1;
     }
 
-    var age = new Date().getFullYear() - 
+    var age = new Date().getFullYear() -
         la.ApplicantDateOfBirth.getFullYear();
 
     if (age > 60) {
@@ -324,7 +348,7 @@ function generateRickProfile(la) {
         risk = risk + 2;
     }
 
-    if (indexOfHoliday > -1 || indexOfHoliday2 > -1 
+    if (indexOfHoliday > -1 || indexOfHoliday2 > -1
         || indexOfHoliday3 > -1 || indexOfHoliday4 > -1) {
         //the loan will be used for a holiday
         risk = risk + 3;
@@ -335,13 +359,13 @@ function generateRickProfile(la) {
         risk = risk + 1;
     }
 
-    
+
     var reviewText = "";
 
     if (age < 18) {
-        reviewText = "your application will not be reviewed, because you have to be 18 years or older.";
+        reviewText = "will not be reviewed, because you have to be 18 years or older";
     } else {
-        reviewText = "your application will be reviewed.";
+        reviewText = "will be reviewed";
     }
 
     var riskProfile = "";
@@ -350,15 +374,43 @@ function generateRickProfile(la) {
         riskProfile = "very low";
     } else if (risk < 5) {
         riskProfile = "low";
-    }else if (risk < 8) {
+    } else if (risk < 8) {
         riskProfile = "medium";
-    }else if (risk < 12) {
+    } else if (risk < 12) {
         riskProfile = "high";
     }
 
-    var summaryText = "Dear " + la.ApplicantName + ", " + reviewText + " Your risk profile is " + riskProfile;
+    var applicationCode = String.raw`\t${createApplicationId()}`;
+
+    var summaryText = foo
+        `Dear ${la.ApplicantName}, <br>
+    your application for ${"$" + la.LoanAmount}, ${reviewText}.<br>
+    Your risk profile is ${riskProfile}.<br>
+    Your unique application code is ${applicationCode}`;
 
     return summaryText;
+}
+
+function createApplicationId() {
+    var result = '';
+    var characters = 'ABCDEUVYZabcdrswxyz01789/\\#@$%()*^!';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 8; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+function foo(strings, ...values) {
+    let str = "";
+    for (var i = 0; i < strings.raw.length; i++) {
+        if (i > 0) {
+            str += `<b>${values[i - 1]}</b>`
+        }
+        str += strings.raw[i];
+    }
+
+    return str;
 }
 
 
